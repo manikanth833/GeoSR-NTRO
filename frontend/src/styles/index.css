@@ -1,0 +1,61 @@
+@import "ol/ol.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #05080E;
+    color: #E2E8F0;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom space-tech grid overlay */
+.bg-tech-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Glass panel styled borders */
+.tech-border {
+  border: 1px solid rgba(0, 240, 255, 0.18);
+}
+
+.tech-panel {
+  background: rgba(10, 15, 26, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05080E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #162034;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00F0FF;
+}
+
+/* Pulse keyframes */
+@keyframes techPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+.animate-tech-pulse {
+  animation: techPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

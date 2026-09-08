@@ -1,0 +1,14 @@
+{
+  "model_name": "GeoSR-NTRO",
+  "backbone": "SEN2SR / Mamba",
+  "trust_layer": "Bounded Refinement Adapter",
+  "trainable_parameters": 11588,
+  "hard_constraint": "Official SEN2SR HardConstraint (Low-Frequency Consistency Projection)",
+  "input_bands": ["B04", "B03", "B02", "B08"],
+  "input_resolution_m": 10.0,
+  "output_resolution_m": 2.5,
+  "scale_factor": 4,
+  "evaluation_subset": "30-patch held-out validation subset",
+  "problem_statement": "SIH 2026 PS 26142 (NTRO - Space Technology)",
+  "philosophy": "We don't hallucinate a sharper satellite image. We generate a higher-resolution representation constrained by what the satellite actually observed."
+}

@@ -1,0 +1,43 @@
+{
+  "evaluation_scope": "30-patch held-out validation subset",
+  "total_validation_patches_in_subset": 30,
+  "methods": {
+    "Bicubic": {
+      "PSNR": 36.4025,
+      "SAM": 2.3979,
+      "SSIM": 0.9777,
+      "MAE": 0.010851,
+      "Consistency": 0.0009476
+    },
+    "Mamba Raw": {
+      "PSNR": 21.3384,
+      "SAM": 36.4250,
+      "SSIM": 0.4194,
+      "MAE": 0.083663,
+      "Consistency": 0.0820112
+    },
+    "Mamba + HC": {
+      "PSNR": 36.1080,
+      "SAM": 2.4476,
+      "SSIM": 0.9763,
+      "MAE": 0.011161,
+      "Consistency": 0.0008205
+    },
+    "GeoSR-NTRO": {
+      "PSNR": 36.3562,
+      "SAM": 2.4483,
+      "SSIM": 0.9775,
+      "MAE": 0.010851,
+      "Consistency": 0.0013762
+    }
+  },
+  "delta_vs_mamba_hc": {
+    "PSNR_dB": 0.2482,
+    "MAE": -0.000309,
+    "RMSE": -0.000472,
+    "SSIM": 0.001184,
+    "SAM_deg": 0.0007,
+    "Consistency": 0.000556
+  },
+  "scientific_summary": "On a held-out validation subset of 30 patches, GeoSR-NTRO improved PSNR by approximately 0.25 dB over the Mamba + Hard Constraint baseline, while adding a bounded trust refinement layer around a frozen SEN2SR/Mamba backbone."
+}
