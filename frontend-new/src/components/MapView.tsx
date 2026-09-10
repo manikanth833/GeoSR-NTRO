@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Map from 'ol/Map';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
+import RenderEvent from 'ol/render/Event';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import ImageLayer from 'ol/layer/Image';
@@ -161,11 +163,11 @@ export const MapView: React.FC<MapViewProps> = ({
     olMapRef.current = map;
 
     // Prerender clip for Swipe comparison between 10m (Left) and 2.5m GeoSR (Right)
-    const prerenderListener = (event: any) => {
+    const prerenderListener = (event: RenderEvent) => {
       const active = activeLayersRef.current;
       if (!active.geosr25m || !active.obs10m) return;
 
-      const ctx = event.context as CanvasRenderingContext2D;
+      const ctx = event.context as CanvasRenderingContext2D | undefined;
       const mapSize = map.getSize();
       if (ctx && mapSize) {
         const width = mapSize[0];
@@ -178,11 +180,11 @@ export const MapView: React.FC<MapViewProps> = ({
       }
     };
 
-    const postrenderListener = (event: any) => {
+    const postrenderListener = (event: RenderEvent) => {
       const active = activeLayersRef.current;
       if (!active.geosr25m || !active.obs10m) return;
 
-      const ctx = event.context as CanvasRenderingContext2D;
+      const ctx = event.context as CanvasRenderingContext2D | undefined;
       if (ctx) {
         ctx.restore();
       }
@@ -192,7 +194,7 @@ export const MapView: React.FC<MapViewProps> = ({
     geosr25m.on('postrender', postrenderListener);
 
     // Pointer move event listener
-    const pointerMoveListener = (e: any) => {
+    const pointerMoveListener = (e: MapBrowserEvent<UIEvent>) => {
       const coords = toLonLat(e.coordinate);
       if (onHoverCoords && coords && coords.length >= 2) {
         onHoverCoords({ lat: coords[1], lon: coords[0] });
@@ -201,7 +203,7 @@ export const MapView: React.FC<MapViewProps> = ({
     map.on('pointermove', pointerMoveListener);
 
     // Single click event listener for pixel inspector
-    const singleClickListener = (e: any) => {
+    const singleClickListener = (e: MapBrowserEvent<UIEvent>) => {
       const coords = toLonLat(e.coordinate);
       if (onSelectPixel && coords && coords.length >= 2) {
         onSelectPixel(coords[1], coords[0]);

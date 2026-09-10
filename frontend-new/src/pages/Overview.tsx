@@ -48,7 +48,7 @@ export const Overview: React.FC<OverviewProps> = ({
 
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>SIH 2026 Submission • NTRO Problem Statement 26142</span>
+          <span></span>
         </div>
 
         <div className="space-y-3 max-w-3xl">

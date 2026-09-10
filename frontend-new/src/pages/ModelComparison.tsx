@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SceneMetadata, ValidationMetrics } from '../types';
 import { api } from '../services/api';
-import { Cpu, TrendingUp, Sparkles, Layers } from 'lucide-react';
+import { Cpu, TrendingUp, Layers } from 'lucide-react';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorBanner } from '../components/ErrorBanner';
 
@@ -217,27 +217,6 @@ export const ModelComparison: React.FC<ModelComparisonProps> = ({ scene }) => {
             </div>
           )}
 
-          {/* Scientific Metric Glossary */}
-          <div className="bg-[#0b0f17] border border-slate-800 rounded-2xl p-6 space-y-3 text-xs text-slate-300">
-            <h4 className="font-bold text-slate-100 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span>Metric Definitions for SIH Evaluation</span>
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-[11px] font-sans">
-              <div className="bg-[#111723] p-3 rounded-xl border border-slate-800/80">
-                <strong className="text-emerald-400 font-mono block mb-1">PSNR (Peak Signal-to-Noise Ratio)</strong>
-                Measures spatial signal fidelity against reference high-resolution satellite observation. Higher values indicate cleaner details without noise.
-              </div>
-              <div className="bg-[#111723] p-3 rounded-xl border border-slate-800/80">
-                <strong className="text-emerald-400 font-mono block mb-1">SAM (Spectral Angle Mapper)</strong>
-                Calculates angular deviation between multi-spectral vectors. Lower values confirm that vegetation and water reflectance signatures are preserved without color shift.
-              </div>
-              <div className="bg-[#111723] p-3 rounded-xl border border-slate-800/80">
-                <strong className="text-emerald-400 font-mono block mb-1">Consistency (Hard Constraint)</strong>
-                Evaluates physical downsampling error against the original 10 m Sentinel-2 pixel matrix, ensuring strict conservation of energy across spatial scales.
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>

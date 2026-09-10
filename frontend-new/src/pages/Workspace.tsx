@@ -6,13 +6,15 @@ import { LayerControls } from '../components/LayerControls';
 import { PixelInspector } from '../components/PixelInspector';
 import { InferenceModal } from '../components/InferenceModal';
 import { DownloadMenu } from '../components/DownloadMenu';
-import { Play, Layers, Info } from 'lucide-react';
+import { UploadModal } from '../components/UploadModal';
+import { Play, Layers, Info, ImageUp } from 'lucide-react';
 
 interface WorkspaceProps {
   scenes: SceneMetadata[];
   selectedScene: SceneMetadata;
   onSelectScene: (scene: SceneMetadata) => void;
   onHoverCoords: (coords: { lat: number; lon: number } | null) => void;
+  onUploaded: (scene: SceneMetadata) => void;
 }
 
 export const Workspace: React.FC<WorkspaceProps> = ({
@@ -20,6 +22,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   selectedScene,
   onSelectScene,
   onHoverCoords,
+  onUploaded,
 }) => {
   const [activeLayers, setActiveLayers] = useState<ActiveLayersState>({
     obs10m: true,
@@ -32,6 +35,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
   const [sliderPos, setSliderPos] = useState<number>(50);
   const [isInferenceOpen, setIsInferenceOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   // Pixel inspection states
   const [pixelData, setPixelData] = useState<PixelInspectionResponse | null>(null);
@@ -94,6 +98,10 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 
         {/* Workspace Actions */}
         <div className="flex items-center gap-2">
+          <button onClick={() => setIsUploadOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-500 hover:bg-indigo-400 text-slate-950 rounded-lg text-xs font-bold shadow-md shadow-indigo-500/20 transition-all">
+            <ImageUp className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Upload Satellite Image</span>
+          </button>
           {/* Run Inference Button */}
           <button
             onClick={() => setIsInferenceOpen(true)}
@@ -152,6 +160,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
         isOpen={isInferenceOpen}
         onClose={() => setIsInferenceOpen(false)}
       />
+      <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} onUploaded={onUploaded} />
     </div>
   );
 };

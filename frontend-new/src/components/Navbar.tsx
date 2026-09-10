@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
           <p className="text-[11px] text-slate-400 font-mono tracking-tight hidden sm:block">
-            SIH 2026 • NTRO PS 26142
+           
           </p>
         </div>
       </div>

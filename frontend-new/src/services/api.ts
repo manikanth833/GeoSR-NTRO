@@ -4,10 +4,11 @@ import {
   SceneMetadata,
   ValidationMetrics,
   InferenceResponse,
+  UploadResponse,
   PixelInspectionResponse,
 } from '../types';
 
-const API_BASE = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 async function checkOk(res: Response): Promise<void> {
   if (res.ok) return;
@@ -67,6 +68,14 @@ export const api = {
         enable_spectral_indices: true,
       }),
     });
+    await checkOk(res);
+    return res.json();
+  },
+
+  async uploadImage(file: File): Promise<UploadResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    const res = await fetch(`${API_BASE}/upload`, { method: 'POST', body: formData });
     await checkOk(res);
     return res.json();
   },

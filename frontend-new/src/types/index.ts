@@ -69,6 +69,13 @@ export interface InferenceResponse {
   telemetry_logs: string[];
 }
 
+export interface UploadResponse {
+  scene_id: string;
+  metadata: SceneMetadata;
+  inference: InferenceResponse;
+  nir_assumption: string;
+}
+
 export interface PixelInspectionRequest {
   scene_id: string;
   lat: number;

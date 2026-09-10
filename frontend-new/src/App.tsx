@@ -28,6 +28,11 @@ export const App: React.FC = () => {
       .catch((err) => console.error('Failed to load scene metrics:', err));
   }, []);
 
+  const handleUploadedScene = useCallback((scene: SceneMetadata) => {
+    setScenes((current) => [...current.filter((item) => item.scene_id !== scene.scene_id), scene]);
+    handleSelectScene(scene);
+  }, [handleSelectScene]);
+
   const initApp = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -108,6 +113,7 @@ export const App: React.FC = () => {
           selectedScene={selectedScene}
           onSelectScene={handleSelectScene}
           onHoverCoords={setMouseCoords}
+          onUploaded={handleUploadedScene}
         />
       )}
 
